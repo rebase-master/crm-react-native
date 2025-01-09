@@ -1,31 +1,19 @@
-import {Image, StyleSheet, Platform, StatusBar} from 'react-native';
+import { StyleSheet, StatusBar} from 'react-native';
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import reducers from '../../components/reducers/PeopleReducer';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const store = createStore(reducers, applyMiddleware(thunk));
 
-export default function HomeScreen() {
+export default HomeScreen(() => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome, Mansoor Khan!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Hello!</ThemedText>
-        <StatusBar barStyle="auto" />
-      </ThemedView>
-    </ParallaxScrollView>
+    <Provider store={store}>
+      <Text>Hello!</Text>
+      <StatusBar style="auto" />
+    </Provider>
   );
-}
+});
 
 const styles = StyleSheet.create({
   titleContainer: {
