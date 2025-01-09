@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "start": "nodemon index.js --exec babel-node -e js"
   },
-  "author": "Emmanuel Henri",
+  "type": "module",
+  "author": "Mansoor Khan",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
