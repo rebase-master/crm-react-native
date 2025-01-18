@@ -1,20 +1,11 @@
-import { StyleSheet, StatusBar} from 'react-native';
-import { createStore, applyMiddleware } from "redux";
-import thunk from 'redux-thunk';
+import { StyleSheet, StatusBar, Text} from 'react-native';
 import { Provider } from 'react-redux';
-import reducers from '../../components/reducers/PeopleReducer';
+import reducers from '@/components/reducers/PeopleReducer';
+import {configureStore} from "@reduxjs/toolkit";
 
-const store = createStore(reducers, applyMiddleware(thunk));
-
-export default HomeScreen(() => {
-  return (
-    <Provider store={store}>
-      <Text>Hello!</Text>
-      <StatusBar style="auto" />
-    </Provider>
-  );
+const store = configureStore({
+  reducer: reducers
 });
-
 const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
@@ -33,3 +24,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 });
+
+const HomeScreen = () => {
+  return (
+    <Provider store={store}>
+      <Text>Hello!</Text>
+      <StatusBar style="auto" />
+    </Provider>
+  );
+};
+
+export default HomeScreen;
